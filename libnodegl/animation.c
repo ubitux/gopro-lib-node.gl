@@ -57,7 +57,8 @@ int ngli_animation_evaluate(struct animation *s, void *dst, double t)
         double tnorm = NGLI_LINEAR_INTERP(t0, t1, t);
         if (kf1->scale_boundaries)
             tnorm = (kf1->offsets[1] - kf1->offsets[0]) * tnorm + kf1->offsets[0];
-        double ratio = kf1->function(tnorm, kf1->nb_args, kf1->args);
+        double ratio = s->mode == NGLI_ANIM_MODE_DERIVATIVE ? kf1->derivative(tnorm, kf1->nb_args, kf1->args)
+                                                            : kf1->function(tnorm, kf1->nb_args, kf1->args);
         if (kf1->scale_boundaries)
             ratio = NGLI_LINEAR_INTERP(kf1->boundaries[0], kf1->boundaries[1], ratio);
 
@@ -75,13 +76,15 @@ int ngli_animation_evaluate(struct animation *s, void *dst, double t)
 int ngli_animation_init(struct animation *s, void *user_arg,
                         struct ngl_node * const *kfs, int nb_kfs,
                         ngli_animation_mix_func_type mix_func,
-                        ngli_animation_cpy_func_type cpy_func)
+                        ngli_animation_cpy_func_type cpy_func,
+                        enum ngli_anim_mode mode)
 {
     s->user_arg = user_arg;
 
     ngli_assert(mix_func && cpy_func);
     s->mix_func = mix_func;
     s->cpy_func = cpy_func;
+    s->mode = mode;
 
     double prev_time = -DBL_MAX;
     for (int i = 0; i < nb_kfs; i++) {

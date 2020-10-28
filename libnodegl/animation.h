@@ -34,6 +34,11 @@ typedef void (*ngli_animation_mix_func_type)(void *user_arg, void *dst,
 typedef void (*ngli_animation_cpy_func_type)(void *user_arg, void *dst,
                                              const struct animkeyframe_priv *kf);
 
+enum ngli_anim_mode {
+    NGLI_ANIM_MODE_NORMAL,
+    NGLI_ANIM_MODE_DERIVATIVE,
+};
+
 struct animation {
     struct ngl_node * const *kfs;
     int nb_kfs;
@@ -41,12 +46,14 @@ struct animation {
     void *user_arg;
     ngli_animation_mix_func_type mix_func;
     ngli_animation_cpy_func_type cpy_func;
+    enum ngli_anim_mode mode;
 };
 
 int ngli_animation_init(struct animation *s, void *user_arg,
                         struct ngl_node * const *kfs, int nb_kfs,
                         ngli_animation_mix_func_type mix_func,
-                        ngli_animation_cpy_func_type cpy_func);
+                        ngli_animation_cpy_func_type cpy_func,
+                        enum ngli_anim_mode mode);
 
 int ngli_animation_evaluate(struct animation *s, void *dst, double t);
 
