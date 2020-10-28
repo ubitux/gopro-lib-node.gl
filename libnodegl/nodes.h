@@ -410,6 +410,7 @@ struct animkeyframe_priv {
     int easing;
     easing_function function;
     easing_function resolution;
+    easing_function derivative;
     double *args;
     int nb_args;
     double offsets[2];

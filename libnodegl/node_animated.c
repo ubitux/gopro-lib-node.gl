@@ -189,7 +189,8 @@ int ngl_anim_evaluate(struct ngl_node *node, void *dst, double t)
         int ret = ngli_animation_init(&s->anim_eval, NULL,
                                       s->animkf, s->nb_animkf,
                                       get_mix_func(node->class->id),
-                                      get_cpy_func(node->class->id));
+                                      get_cpy_func(node->class->id),
+                                      NGLI_ANIM_MODE_NORMAL);
         if (ret < 0)
             return ret;
     }
@@ -213,7 +214,8 @@ static int animation_init(struct ngl_node *node)
     return ngli_animation_init(&s->anim, NULL,
                                s->animkf, s->nb_animkf,
                                get_mix_func(node->class->id),
-                               get_cpy_func(node->class->id));
+                               get_cpy_func(node->class->id),
+                               NGLI_ANIM_MODE_NORMAL);
 }
 
 #define DECLARE_INIT_FUNC(suffix, class_data, class_data_size, class_data_type) \

@@ -264,6 +264,12 @@
     - [max_pixels, int]
     - [stream_idx, int]
 
+- Motion2D:
+    - [animation, Node]
+
+- Motion3D:
+    - [animation, Node]
+
 - Noise:
     - [octaves, int]
     - [lacunarity, double]

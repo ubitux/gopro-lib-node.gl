@@ -77,7 +77,8 @@ static int animatedbuffer_init(struct ngl_node *node)
 
     int ret = ngli_animation_init(&s->anim, s,
                                   s->animkf, s->nb_animkf,
-                                  mix_buffer, cpy_buffer);
+                                  mix_buffer, cpy_buffer,
+                                  NGLI_ANIM_MODE_NORMAL);
     if (ret < 0)
         return ret;
 

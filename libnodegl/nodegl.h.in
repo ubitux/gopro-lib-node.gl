@@ -161,6 +161,8 @@ struct ngl_node;
 #define NGL_NODE_IOMAT4                 NGLI_FOURCC('I','O','m','4')
 #define NGL_NODE_IOBOOL                 NGLI_FOURCC('I','O','b','1')
 #define NGL_NODE_MEDIA                  NGLI_FOURCC('M','d','i','a')
+#define NGL_NODE_MOTION2D               NGLI_FOURCC('M','t','2','d')
+#define NGL_NODE_MOTION3D               NGLI_FOURCC('M','t','3','d')
 #define NGL_NODE_NOISE                  NGLI_FOURCC('N','o','i','z')
 #define NGL_NODE_PROGRAM                NGLI_FOURCC('P','r','g','m')
 #define NGL_NODE_QUAD                   NGLI_FOURCC('Q','u','a','d')
