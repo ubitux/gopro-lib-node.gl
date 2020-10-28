@@ -593,14 +593,45 @@ Parameter | Live-chg. | Type | Description | Default
 `box_corner` |  | [`vec3`](#parameter-types) | origin coordinates of `box_width` and `box_height` vectors | (`-1`,`-1`,`0`)
 `box_width` |  | [`vec3`](#parameter-types) | box width vector | (`2`,`0`,`0`)
 `box_height` |  | [`vec3`](#parameter-types) | box height vector | (`0`,`2`,`0`)
+`font_file` |  | [`string`](#parameter-types) | path to font file (require build with external text libraries) | 
+`writing_mode` |  | [`writing_mode`](#writing_mode-choices) | direction flow per character and line | `undefined`
 `padding` |  | [`int`](#parameter-types) | pixel padding around the text | `3`
 `font_scale` |  | [`double`](#parameter-types) | scaling of the font | `1`
+`effects` |  | [`NodeList`](#parameter-types) ([TextEffect](#texteffect)) | stack of effects | 
 `valign` |  | [`valign`](#valign-choices) | vertical alignment of the text in the box | `center`
 `halign` |  | [`halign`](#halign-choices) | horizontal alignment of the text in the box | `center`
 `aspect_ratio` | ✓ | [`rational`](#parameter-types) | box aspect ratio | 
+`path` |  | [`Node`](#parameter-types) ([Path](#path)) | path to follow | 
 
 
 **Source**: [node_text.c](/libnodegl/node_text.c)
+
+
+## TextEffect
+
+Parameter | Live-chg. | Type | Description | Default
+--------- | :-------: | ---- | ----------- | :-----:
+`start` |  | [`double`](#parameter-types) | absolute start time of the effect | `0`
+`end` |  | [`double`](#parameter-types) | absolute end time of the effect | `5`
+`target` |  | [`text_target`](#text_target-choices) | segmentation target of the effect | `text`
+`random` |  | [`bool`](#parameter-types) | randomize the order the effect are applied on the target | `0`
+`random_seed` |  | [`int`](#parameter-types) | random seed, use < 0 to disable it | `0`
+`start_pos` |  | [`Node`](#parameter-types) ([UniformFloat](#uniformfloat), [AnimatedFloat](#animatedfloat), [Noise](#noise)) | text position where the effect starts | 
+`end_pos` |  | [`Node`](#parameter-types) ([UniformFloat](#uniformfloat), [AnimatedFloat](#animatedfloat), [Noise](#noise)) | text position where the effect ends | 
+`overlap` |  | [`Node`](#parameter-types) ([UniformFloat](#uniformfloat), [AnimatedFloat](#animatedfloat), [Noise](#noise)) | overlap factor between target elements | 
+`transform` |  | [`Node`](#parameter-types) ([Rotate](#rotate), [RotateQuat](#rotatequat), [Transform](#transform), [Translate](#translate), [Scale](#scale), [Skew](#skew), [Identity](#identity)) | transformation chain | 
+`line_spacing` |  | [`Node`](#parameter-types) ([UniformFloat](#uniformfloat), [AnimatedFloat](#animatedfloat), [Noise](#noise)) | extra line spacing | 
+`char_spacing` |  | [`Node`](#parameter-types) ([UniformFloat](#uniformfloat), [AnimatedFloat](#animatedfloat), [Noise](#noise)) | extra character spacing | 
+`alpha` |  | [`Node`](#parameter-types) ([UniformFloat](#uniformfloat), [AnimatedFloat](#animatedfloat), [Noise](#noise)) | alpha/opacity | 
+`color` |  | [`Node`](#parameter-types) ([UniformVec4](#uniformvec4), [AnimatedVec4](#animatedvec4)) | characters fill color | 
+`stroke_width` |  | [`Node`](#parameter-types) ([UniformFloat](#uniformfloat), [AnimatedFloat](#animatedfloat), [Noise](#noise)) | characters stroke width | 
+`stroke_color` |  | [`Node`](#parameter-types) ([UniformVec4](#uniformvec4), [AnimatedVec4](#animatedvec4)) | characters stroke color | 
+`glow_width` |  | [`Node`](#parameter-types) ([UniformFloat](#uniformfloat), [AnimatedFloat](#animatedfloat), [Noise](#noise)) | characters stroke width | 
+`glow_color` |  | [`Node`](#parameter-types) ([UniformVec4](#uniformvec4), [AnimatedVec4](#animatedvec4)) | characters stroke color | 
+`blur` |  | [`Node`](#parameter-types) ([UniformFloat](#uniformfloat), [AnimatedFloat](#animatedfloat), [Noise](#noise)) | characters blur | 
+
+
+**Source**: [node_texteffect.c](/libnodegl/node_texteffect.c)
 
 
 ## Texture2D
@@ -1469,6 +1500,15 @@ Constant | Description
 `depth` | add depth buffer
 `stencil` | add stencil buffer
 
+## writing_mode choices
+
+Constant | Description
+-------- | -----------
+`undefined` | undefined (automatic)
+`horizontal-tb` | LTR: left-to-right flow then top-to-bottom per line, RTL: right-to-left flow then top-to-bottom per line
+`vertical-rl` | LTR: top-to-bottom flow then right-to-left per line, RTL: bottom-to-top flow then left-to-right per line
+`vertical-lr` | LTR: top-to-bottom flow then left-to-right per line, RTL: bottom-to-top flow then right-to-left per line
+
 ## valign choices
 
 Constant | Description
@@ -1484,6 +1524,16 @@ Constant | Description
 `center` | horizontally centered
 `right` | right positioned
 `left` | left positioned
+
+## text_target choices
+
+Constant | Description
+-------- | -----------
+`char` | characters
+`char_nospace` | characters without space
+`word` | words
+`line` | lines
+`text` | whole text
 
 ## format choices
 

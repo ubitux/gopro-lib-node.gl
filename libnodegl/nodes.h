@@ -461,6 +461,39 @@ struct path_priv {
 int ngli_path_evaluate(struct path_priv *s, float *dst, float distance);
 
 enum {
+    NGLI_TEXT_EFFECT_CHAR,
+    NGLI_TEXT_EFFECT_CHAR_NOSPACE,
+    NGLI_TEXT_EFFECT_WORD,
+    NGLI_TEXT_EFFECT_LINE,
+    NGLI_TEXT_EFFECT_TEXT,
+};
+
+struct texteffect_priv {
+    double start_time;
+    double end_time;
+    int target;
+    int random;
+    int random_seed;
+
+    /* if animated, expressed in effect time (0 to 1) */
+    struct ngl_node *start_pos_node;
+    struct ngl_node *end_pos_node;
+    struct ngl_node *overlap_node;
+
+    /* if animated, expressed in target time (0 to 1) */
+    struct ngl_node *transform_chain;
+    struct ngl_node *line_spacing_node;
+    struct ngl_node *char_spacing_node;
+    struct ngl_node *alpha_node;
+    struct ngl_node *color_node;
+    struct ngl_node *stroke_width_node;
+    struct ngl_node *stroke_color_node;
+    struct ngl_node *glow_width_node;
+    struct ngl_node *glow_color_node;
+    struct ngl_node *blur_node;
+};
+
+enum {
     NGLI_NODE_CATEGORY_NONE,
     NGLI_NODE_CATEGORY_UNIFORM,
     NGLI_NODE_CATEGORY_TEXTURE,

@@ -110,6 +110,7 @@
     action(NGL_NODE_SCALE,                  ngli_scale_class)                   \
     action(NGL_NODE_SKEW,                   ngli_skew_class)                    \
     action(NGL_NODE_TEXT,                   ngli_text_class)                    \
+    action(NGL_NODE_TEXTEFFECT,             ngli_texteffect_class)              \
     action(NGL_NODE_TEXTURE2D,              ngli_texture2d_class)               \
     action(NGL_NODE_TEXTURE3D,              ngli_texture3d_class)               \
     action(NGL_NODE_TEXTURECUBE,            ngli_texturecube_class)             \
