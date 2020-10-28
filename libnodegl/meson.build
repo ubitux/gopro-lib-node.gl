@@ -102,6 +102,7 @@ lib_src = files(
   'deserialize.c',
   'dot.c',
   'drawutils.c',
+  'edtaa3func.c',
   'format.c',
   'gctx.c',
   'hmap.c',
@@ -142,6 +143,7 @@ lib_src = files(
   'node_streamed.c',
   'node_streamedbuffer.c',
   'node_text.c',
+  'node_texteffect.c',
   'node_texture.c',
   'node_time.c',
   'node_timerangefilter.c',
@@ -162,6 +164,7 @@ lib_src = files(
   'rendertarget.c',
   'rnode.c',
   'serialize.c',
+  'text.c',
   'texture.c',
   'transforms.c',
   'utils.c',
@@ -215,6 +218,18 @@ if 'frameworks' in host_cfg
 endif
 lib_src += host_cfg.get('src', [])
 
+
+#
+# Text library dependencies
+#
+
+opt_textlibs = get_option('text-libs')
+dep_harfbuzz = dependency('harfbuzz',  required: opt_textlibs)
+dep_freetype = dependency('freetype2', required: opt_textlibs)
+if dep_harfbuzz.found() and dep_freetype.found()
+  lib_deps += [dep_harfbuzz, dep_freetype]
+  conf_data.set10('HAVE_TEXTLIBS', true)
+endif
 
 #
 # VAAPI dependency
