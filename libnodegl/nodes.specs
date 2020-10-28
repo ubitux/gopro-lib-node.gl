@@ -321,6 +321,12 @@
     - [anchor, vec3]
     - [anim, Node]
 
+- Skew:
+    - [child, Node]
+    - [factors, vec3]
+    - [axis, vec3]
+    - [anim, Node]
+
 - Text:
     - [text, string]
     - [fg_color, vec4]

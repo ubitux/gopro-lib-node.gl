@@ -136,6 +136,7 @@ lib_src = files(
   'node_rotatequat.c',
   'node_rtt.c',
   'node_scale.c',
+  'node_skew.c',
   'node_streamed.c',
   'node_streamedbuffer.c',
   'node_text.c',
