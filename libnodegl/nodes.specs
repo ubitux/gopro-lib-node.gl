@@ -264,6 +264,13 @@
     - [max_pixels, int]
     - [stream_idx, int]
 
+- Noise:
+    - [octaves, int]
+    - [lacunarity, double]
+    - [gain, double]
+    - [seed, int]
+    - [function, select]
+
 - Program:
     - [vertex, string]
     - [fragment, string]

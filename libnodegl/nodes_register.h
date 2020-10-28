@@ -94,6 +94,7 @@
     action(NGL_NODE_IOMAT4,                 ngli_iomat4_class)                  \
     action(NGL_NODE_IOBOOL,                 ngli_iobool_class)                  \
     action(NGL_NODE_MEDIA,                  ngli_media_class)                   \
+    action(NGL_NODE_NOISE,                  ngli_noise_class)                   \
     action(NGL_NODE_PROGRAM,                ngli_program_class)                 \
     action(NGL_NODE_QUAD,                   ngli_quad_class)                    \
     action(NGL_NODE_RENDER,                 ngli_render_class)                  \
