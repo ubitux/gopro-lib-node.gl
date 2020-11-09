@@ -29,6 +29,7 @@
 #include <string.h>
 #include <sys/time.h>
 
+#include "bstr.h"
 #include "log.h"
 #include "memory.h"
 #include "utils.h"
@@ -152,4 +153,54 @@ void ngli_thread_set_name(const char *name)
 #elif ((defined(__linux__) && defined(__GLIBC__)) || defined(__ANDROID__))
     pthread_setname_np(pthread_self(), name);
 #endif
+}
+
+static int count_lines(const char *s)
+{
+    int count = 0;
+    while (*s) {
+        const size_t len = strcspn(s, "\n");
+        count++;
+        if (!s[len])
+            break;
+        s += len + 1;
+    }
+    return count;
+}
+
+static int count_digits(int x)
+{
+    int n = 1;
+    while (x /= 10)
+        n++;
+    return n;
+}
+
+char *ngli_numbered_lines(const char *s)
+{
+    struct bstr *b = ngli_bstr_create();
+    if (!b)
+        return NULL;
+
+    const int nb_lines = count_lines(s);
+    const int nb_digits = count_digits(nb_lines);
+    int line = 1;
+    while (*s) {
+        const size_t len = strcspn(s, "\n");
+        ngli_bstr_printf(b, "%*d %.*s\n", nb_digits, line++, (int)len, s);
+        if (!s[len])
+            break;
+        s += len + 1;
+    }
+
+    char *ret = ngli_bstr_strdup(b);
+    ngli_bstr_freep(&b);
+    if (!ret)
+        return NULL;
+
+    size_t len = strlen(ret);
+    while (len && ret[len - 1] == '\n')
+        ret[--len] = 0;
+
+    return ret;
 }
