@@ -27,6 +27,7 @@
     action(NGL_NODE_ANIMATEDBUFFERVEC2,     ngli_animatedbuffervec2_class)      \
     action(NGL_NODE_ANIMATEDBUFFERVEC3,     ngli_animatedbuffervec3_class)      \
     action(NGL_NODE_ANIMATEDBUFFERVEC4,     ngli_animatedbuffervec4_class)      \
+    action(NGL_NODE_ANIMATEDPATH,           ngli_animatedpath_class)            \
     action(NGL_NODE_ANIMATEDTIME,           ngli_animatedtime_class)            \
     action(NGL_NODE_ANIMATEDFLOAT,          ngli_animatedfloat_class)           \
     action(NGL_NODE_ANIMATEDVEC2,           ngli_animatedvec2_class)            \
@@ -97,6 +98,8 @@
     action(NGL_NODE_MOTION2D,               ngli_motion2d_class)                \
     action(NGL_NODE_MOTION3D,               ngli_motion3d_class)                \
     action(NGL_NODE_NOISE,                  ngli_noise_class)                   \
+    action(NGL_NODE_PATH,                   ngli_path_class)                    \
+    action(NGL_NODE_PATHDRAW,               ngli_pathdraw_class)                \
     action(NGL_NODE_PROGRAM,                ngli_program_class)                 \
     action(NGL_NODE_QUAD,                   ngli_quad_class)                    \
     action(NGL_NODE_RENDER,                 ngli_render_class)                  \

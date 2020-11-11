@@ -17,6 +17,17 @@ List of `AnimatedBuffer*` nodes:
 - `AnimatedBufferVec3`
 - `AnimatedBufferVec4`
 
+## AnimatedPath
+
+Parameter | Live-chg. | Type | Description | Default
+--------- | :-------: | ---- | ----------- | :-----:
+`keyframes` |  | [`NodeList`](#parameter-types) ([AnimKeyFrameFloat](#animkeyframefloat)) | float key frames to interpolate from, representing the normed distance from the start of the `path` | 
+`path` |  | [`Node`](#parameter-types) ([Path](#path)) | path to follow | 
+
+
+**Source**: [node_animated.c](/libnodegl/node_animated.c)
+
+
 ## AnimatedTime
 
 Parameter | Live-chg. | Type | Description | Default
@@ -422,6 +433,30 @@ Parameter | Live-chg. | Type | Description | Default
 **Source**: [node_noise.c](/libnodegl/node_noise.c)
 
 
+## Path
+
+Parameter | Live-chg. | Type | Description | Default
+--------- | :-------: | ---- | ----------- | :-----:
+`points` |  | [`Node`](#parameter-types) ([BufferVec3](#buffer), [AnimatedBufferVec3](#animatedbuffer)) | anchor points the path go through | 
+`controls` |  | [`Node`](#parameter-types) ([BufferVec3](#buffer), [AnimatedBufferVec3](#animatedbuffer)) | control points (must be twice the number of `points` minus 2 with `mode`=`bezier3`, and 2 with `mode`=`catmull`) | 
+`mode` |  | [`path_mode`](#path_mode-choices) | interpolation mode between points | `bezier3`
+`precision` |  | [`int`](#parameter-types) | number of division per curve segment | `64`
+`tension` |  | [`double`](#parameter-types) | tension between points (catmull-rom only) | `0.5`
+
+
+**Source**: [node_path.c](/libnodegl/node_path.c)
+
+
+## PathDraw
+
+Parameter | Live-chg. | Type | Description | Default
+--------- | :-------: | ---- | ----------- | :-----:
+`path` |  | [`Node`](#parameter-types) ([Path](#path)) | path to draw | 
+
+
+**Source**: [node_pathdraw.c](/libnodegl/node_pathdraw.c)
+
+
 ## Program
 
 Parameter | Live-chg. | Type | Description | Default
@@ -691,7 +726,7 @@ Parameter | Live-chg. | Type | Description | Default
 --------- | :-------: | ---- | ----------- | :-----:
 `child` |  | [`Node`](#parameter-types) | scene to translate | 
 `vector` | ✓ | [`vec3`](#parameter-types) | translation vector | (`0`,`0`,`0`)
-`anim` |  | [`Node`](#parameter-types) ([AnimatedVec3](#animatedvec3), [StreamedVec3](#streamedvec3)) | `vector` animation | 
+`anim` |  | [`Node`](#parameter-types) ([AnimatedVec3](#animatedvec3), [StreamedVec3](#streamedvec3), [AnimatedPath](#animatedpath)) | `vector` animation | 
 
 
 **Source**: [node_translate.c](/libnodegl/node_translate.c)
@@ -1419,6 +1454,13 @@ Constant | Description
 -------- | -----------
 `cubic` | cubic hermite curve, f(t)=3t²-2t³
 `quintic` | quintic curve, f(t)=6t⁵-15t⁴+10x³
+
+## path_mode choices
+
+Constant | Description
+-------- | -----------
+`bezier3` | cubic bezier curve
+`catmull` | catmull-rom curve
 
 ## framebuffer_features choices
 

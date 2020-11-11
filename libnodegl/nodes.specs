@@ -16,6 +16,10 @@
 
 - AnimatedBufferVec4: _AnimatedBuffer
 
+- AnimatedPath:
+    - [keyframes, NodeList]
+    - [path, Node]
+
 - AnimatedTime:
     - [keyframes, NodeList]
 
@@ -276,6 +280,16 @@
     - [gain, double]
     - [seed, int]
     - [function, select]
+
+- Path:
+    - [points, Node]
+    - [controls, Node]
+    - [mode, select]
+    - [precision, int]
+    - [tension, double]
+
+- PathDraw:
+    - [path, Node]
 
 - Program:
     - [vertex, string]

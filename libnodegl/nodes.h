@@ -418,6 +418,48 @@ struct animkeyframe_priv {
     double boundaries[2];
 };
 
+struct path_knot {
+    float start_time;
+
+    // XXX: do we still need this?
+    const float *start_point;
+    const float *start_control;
+    const float *end_control;
+
+    float poly_x[4];
+    float poly_y[4];
+    float poly_z[4];
+};
+
+struct path_priv {
+    struct ngl_node *points_buffer;
+    struct ngl_node *controls_buffer;
+    int mode;
+    int closed;
+    int precision;
+    double tension;
+
+    int nb_segments;
+
+    struct path_knot *knots;
+    int current_knot;
+
+    float *catmull_controls;
+
+    /* XXX: pack lut+arc_distances+norm in the same array */
+    float *lut;
+    int lut_count;
+
+    float *arc_distances;
+    int arc_distances_count;
+
+    float *arc_distances_normalized;
+    int arc_distances_normalized_count;
+    int current_pos;
+};
+
+int ngli_path_evaluate(struct path_priv *s, float *dst, float distance);
+
 enum {
     NGLI_NODE_CATEGORY_NONE,
     NGLI_NODE_CATEGORY_UNIFORM,
