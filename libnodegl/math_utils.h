@@ -29,6 +29,7 @@
 #endif
 
 #define NGLI_MIX(x, y, a) ((x)*(1.-(a)) + (y)*(a))
+#define NGLI_LINEAR_INTERP(x, y, a) ((a - x) / (y - x))
 
 float ngli_vec3_length(const float *v);
 void ngli_vec3_scale(float *dst, const float *v, const float s);
