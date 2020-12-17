@@ -538,6 +538,7 @@ static int handle_scene(const void *data)
         return NGL_ERROR_INVALID_DATA;
     int ret = set_scene(scene);
     ngl_node_unrefp(&scene);
+    seek_event(0);
     return ret;
 }
 
